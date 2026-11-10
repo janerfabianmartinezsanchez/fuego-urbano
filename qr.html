@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Códigos QR de Alta Resolución | Fuego Urbano 🔥</title>
+  <link rel="icon" type="image/jpeg" href="assets/images/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .qr-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px 80px;
+    }
+
+    .qr-header-box {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .qr-header-box h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #fff 0%, #ff8a50 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .qr-header-box p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .qr-grid-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    /* Print flyer card */
+    .qr-stand-card {
+      background: #0f131a;
+      border: 2px solid rgba(255, 87, 34, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(255, 87, 34, 0.15);
+      position: relative;
+    }
+
+    .flyer-logo-badge {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 3px solid var(--primary-fire);
+      margin: 0 auto 12px;
+      display: block;
+      box-shadow: 0 0 20px var(--fire-glow);
+    }
+
+    .flyer-brand-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .flyer-brand-sub {
+      font-size: 0.8rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .qr-code-frame {
+      background: #ffffff;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      display: inline-block;
+      margin: 0 auto 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    #qr-canvas-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #qr-canvas-wrapper canvas {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .flyer-callout {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .flyer-callout-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .flyer-phone-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      color: var(--whatsapp-green);
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+    }
+
+    /* Options & Actions Box */
+    .qr-config-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .panel-block-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .qr-destination-select {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dest-option-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      text-align: left;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dest-option-btn:hover {
+      border-color: rgba(255, 87, 34, 0.5);
+      background: rgba(255, 87, 34, 0.05);
+    }
+
+    .dest-option-btn.active {
+      border-color: var(--primary-fire);
+      background: rgba(255, 87, 34, 0.15);
+      box-shadow: 0 0 15px rgba(255, 87, 34, 0.2);
+    }
+
+    .dest-option-btn strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+
+    .dest-option-btn span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      word-break: break-all;
+    }
+
+    .custom-url-input-wrap {
+      margin-top: 10px;
+      display: none;
+    }
+
+    .custom-url-input-wrap.visible {
+      display: block;
+    }
+
+    .download-actions-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-download-highres {
+      background: var(--primary-gradient);
+      color: #fff;
+      border: none;
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: var(--shadow-fire);
+      transition: transform 0.2s;
+    }
+
+    .btn-download-highres:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-download-svg {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-download-svg:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-print-flyer {
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      color: var(--whatsapp-green);
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-print-flyer:hover {
+      background: var(--whatsapp-green);
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .qr-grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .site-header, .site-footer, .qr-config-panel, .qr-header-box, .btn-back-nav {
+        display: none !important;
+      }
+      .qr-container {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .qr-stand-card {
+        background: #fff !important;
+        color: #000 !important;
+        border: 2px solid #000 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        padding: 40px !important;
+      }
+      .flyer-brand-title {
+        color: #000 !important;
+      }
+      .flyer-callout {
+        color: #000 !important;
+      }
+      .flyer-callout-sub {
+        color: #333 !important;
+      }
+      .flyer-phone-pill {
+        border-color: #000 !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <img src="assets/images/logo.jpg" alt="Logo Fuego Urbano" class="brand-logo">
+        <div class="brand-text">
+          <h1>FUEGO URBANO</h1>
+          <span>Street Food & Grill</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <a href="index.html" class="btn-custom-view">⬅️ Volver al Menú</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="qr-container">
+    <div class="qr-header-box">
+      <h1>Código QR de Alta Resolución 🔥</h1>
+      <p>Listo para imprimir en avisos de mesa, volantes publicitarios o stickers de empaque.</p>
+    </div>
+
+    <div class="qr-grid-layout">
+      <!-- Stand / Flyer Preview Card -->
+      <div class="qr-stand-card" id="printable-flyer">
+        <img src="assets/images/logo.jpg" alt="Logo" class="flyer-logo-badge">
+        <h2 class="flyer-brand-title">FUEGO URBANO</h2>
+        <div class="flyer-brand-sub">STREET FOOD & GRILL</div>
+
+        <div class="qr-code-frame">
+          <div id="qr-canvas-wrapper"></div>
+        </div>
+
+        <div class="flyer-callout" id="flyer-callout-text">¡ESCANEA Y PIDE AHORA!</div>
+        <p class="flyer-callout-sub" id="flyer-sub-text">Abre nuestro menú digital y realiza tu pedido directamente</p>
+
+        <div class="flyer-phone-pill">
+          <span>💬 WhatsApp Pedidos:</span>
+          <span>+57 312 629 2030</span>
+        </div>
+      </div>
+
+      <!-- Config & Download Actions -->
+      <div class="qr-config-panel">
+        <div>
+          <h3 class="panel-block-title">1. Elige el Destino del Código QR:</h3>
+          <div class="qr-destination-select">
+            <!-- Opción 1: Menú Digital Oficial Vercel -->
+            <button class="dest-option-btn active" id="opt-vercel" onclick="selectDestination('vercel')">
+              <strong>🔥 Menú Digital & App (Oficial Vercel)</strong>
+              <span>https://fuego-urbano-1.vercel.app</span>
+            </button>
+
+            <!-- Opción 2: WhatsApp Directo -->
+            <button class="dest-option-btn" id="opt-whatsapp" onclick="selectDestination('whatsapp')">
+              <strong>💬 Chat de Pedidos en WhatsApp</strong>
+              <span>https://wa.me/573126292030</span>
+            </button>
+
+            <!-- Opción 3: Red Local -->
+            <button class="dest-option-btn" id="opt-local" onclick="selectDestination('local')">
+              <strong>💻 Servidor Local (Desarrollo)</strong>
+              <span>http://192.168.1.107:3000/</span>
+            </button>
+
+            <div id="custom-url-box" class="custom-url-input-wrap">
+              <input 
+                type="url" 
+                id="custom-url-input" 
+                class="search-input" 
+                placeholder="https://tudominio.com" 
+                value="https://fuegourbano.com"
+                oninput="updateCustomUrl()" 
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="panel-block-title">2. Descargar o Imprimir:</h3>
+          <div class="download-actions-grid">
+            <button class="btn-download-highres" onclick="downloadHighResPng()">
+              <span>📥 Descargar Imagen PNG (2000 x 2000 px)</span>
+            </button>
+
+            <button class="btn-download-svg" onclick="downloadVectorSvg()">
+              <span>📐 Descargar Vectorial (SVG para Imprenta)</span>
+            </button>
+
+            <button class="btn-print-flyer" onclick="window.print()">
+              <span>🖨️ Imprimir Volante para Mesa</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/qrcode.min.js"></script>
+  <script>
+    const VERCEL_URL = 'https://fuego-urbano-1.vercel.app';
+    const WHATSAPP_URL = 'https://wa.me/573126292030?text=Hola%20Fuego%20Urbano%2C%20quiero%20hacer%20un%20pedido%20🔥';
+    const LOCAL_IP_MENU_URL = 'http://192.168.1.107:3000/';
+    
+    let currentUrl = VERCEL_URL;
+    let qrInstance = null;
+
+    function renderQR(text) {
+      currentUrl = text;
+      const container = document.getElementById('qr-canvas-wrapper');
+      container.innerHTML = '';
+      
+      qrInstance = new QRCode(container, {
+        text: text,
+        width: 260,
+        height: 260,
+        colorDark: '#0a0c10',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    function selectDestination(type) {
+      document.querySelectorAll('.dest-option-btn').forEach(b => b.classList.remove('active'));
+      const customBox = document.getElementById('custom-url-box');
+      if (customBox) customBox.classList.remove('visible');
+
+      const calloutText = document.getElementById('flyer-callout-text');
+      const subText = document.getElementById('flyer-sub-text');
+
+      if (type === 'vercel') {
+        const btn = document.getElementById('opt-vercel');
+        if (btn) btn.classList.add('active');
+        calloutText.textContent = '¡ESCANEA Y PIDE AHORA!';
+        subText.textContent = 'Abre nuestro menú digital oficial e instala la app en tu celular';
+        renderQR(VERCEL_URL);
+      } else if (type === 'whatsapp') {
+        const btn = document.getElementById('opt-whatsapp');
+        if (btn) btn.classList.add('active');
+        calloutText.textContent = '¡CHATEA Y PIDE POR WHATSAPP!';
+        subText.textContent = 'Escríbenos directamente al WhatsApp oficial de Fuego Urbano';
+        renderQR(WHATSAPP_URL);
+      } else if (type === 'local') {
+        const btn = document.getElementById('opt-local');
+        if (btn) btn.classList.add('active');
+        calloutText.textContent = '¡SERVIDOR LOCAL DE PRUEBAS!';
+        subText.textContent = 'Acceso a través de tu red Wi-Fi local para desarrollo';
+        renderQR(LOCAL_IP_MENU_URL);
+      } else if (type === 'custom') {
+        const btn = document.getElementById('opt-custom');
+        if (btn) btn.classList.add('active');
+        if (customBox) customBox.classList.add('visible');
+        calloutText.textContent = '¡ESCANEA Y PIDE AHORA!';
+        subText.textContent = 'Abre nuestro sitio web oficial';
+        const val = document.getElementById('custom-url-input').value.trim() || VERCEL_URL;
+        renderQR(val);
+      }
+    }
+
+    function updateCustomUrl() {
+      const val = document.getElementById('custom-url-input').value.trim();
+      if (val) {
+        renderQR(val);
+      }
+    }
+
+    // Exportar PNG en Ultra Alta Resolución (2048 x 2048 px con borde blanco)
+    function downloadHighResPng() {
+      if (!qrInstance) return;
+
+      const model = qrInstance.getModel();
+      const moduleCount = model.getModuleCount();
+      const exportSize = 2048;
+      const quietZoneModules = 4;
+      const totalModules = moduleCount + (quietZoneModules * 2);
+      const moduleSize = exportSize / totalModules;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = exportSize;
+      canvas.height = exportSize;
+      const ctx = canvas.getContext('2d');
+
+      // Fondo blanco de alta resolución
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, exportSize, exportSize);
+
+      // Dibujar módulos oscuros
+      ctx.fillStyle = '#0a0c10';
+      for (let row = 0; row < moduleCount; row++) {
+        for (let col = 0; col < moduleCount; col++) {
+          if (model.isDark(row, col)) {
+            const x = Math.round((col + quietZoneModules) * moduleSize);
+            const y = Math.round((row + quietZoneModules) * moduleSize);
+            const w = Math.ceil(moduleSize);
+            const h = Math.ceil(moduleSize);
+            ctx.fillRect(x, y, w, h);
+          }
+        }
+      }
+
+      // Descargar enlace
+      const link = document.createElement('a');
+      link.download = 'fuego-urbano-qr-vercel-2048px.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // Exportar SVG Vectorial
+    function downloadVectorSvg() {
+      if (!qrInstance) return;
+      const svgString = qrInstance.getSvg();
+      const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = 'fuego-urbano-qr-vercel.svg';
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Iniciar con la opción oficial de Vercel
+    window.addEventListener('DOMContentLoaded', () => {
+      selectDestination('vercel');
+    });
+  </script>
+</body>
+</html>

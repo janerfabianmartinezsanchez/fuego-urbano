@@ -1,0 +1,25 @@
+{
+  "name": "Fuego Urbano | Street Food & Grill",
+  "short_name": "Fuego Urbano",
+  "description": "Las mejores hamburguesas artesanales, salchipapas, perros calientes y mazorcadas con envío a domicilio.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b0d11",
+  "theme_color": "#ff5722",
+  "icons": [
+    {
+      "src": "./assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

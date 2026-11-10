@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Fuego Urbano | Street Food & Grill 🔥</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="description" content="Pide las mejores hamburguesas artesanales, salchipapas cargadas, perros gigantes y mazorcadas a domicilio en Fuego Urbano.">
+  <meta name="theme-color" content="#0a0c10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Fuego Urbano">
+  
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/jpeg" href="assets/images/logo.jpg">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles/main.css?v=3">
+</head>
+<body>
+
+  <!-- PWA Smart Install Banner -->
+  <div id="pwa-install-banner" class="pwa-banner">
+    <div class="pwa-banner-content">
+      <div class="pwa-banner-left">
+        <img src="assets/images/logo.jpg" alt="Fuego Urbano App" class="pwa-banner-icon">
+        <div class="pwa-banner-text">
+          <h4>Instala Fuego Urbano</h4>
+          <p>Instálala en tu celular para pedir más rápido sin descargar de tiendas.</p>
+        </div>
+      </div>
+      <div class="pwa-banner-actions">
+        <button id="pwa-install-btn" class="btn-pwa-install">📲 Instalar App</button>
+        <button id="pwa-dismiss-btn" class="btn-pwa-close" title="Cerrar">&times;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <img src="assets/images/logo.jpg" alt="Logo Fuego Urbano" class="brand-logo">
+        <div class="brand-text">
+          <h1>FUEGO URBANO</h1>
+          <span>Street Food & Grill</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <button id="nav-install-btn" class="btn-nav-install">
+          <span>📲</span> Instalar App
+        </button>
+        <a href="qr.html" class="btn-header-qr">
+          <span>📷</span> <span>Código QR</span>
+        </a>
+        <a href="https://wa.me/573126292030" target="_blank" class="btn-header-wa">
+          <span>💬</span> <span>WhatsApp</span>
+        </a>
+        <button class="btn-header-cart btn-open-cart">
+          <span>🛒</span>
+          <span class="btn-label">Carrito</span>
+          <span class="cart-badge cart-count-val">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text-block">
+        <div class="hero-tag">🔥 El auténtico sabor callejero</div>
+        <h2 class="hero-title">
+          Comidas rápidas que encienden tu <span class="highlight">apetito</span>.
+        </h2>
+        <p class="hero-subtitle">
+          Hamburguesas smash artesanales, salchipapas monstruosas, desgranados criollos y perros cargados. Preparados al instante con ingredientes frescos y salsas de la casa.
+        </p>
+
+        <div class="hero-badges-row">
+          <div class="hero-badge-item">
+            <span>🛵</span> Domicilios Rápidos
+          </div>
+          <div class="hero-badge-item">
+            <span>🥩</span> Carne 100% Angus & Grill
+          </div>
+          <div class="hero-badge-item">
+            <span>🧀</span> Queso Fundido al Soplete
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-banner-img-wrapper" onclick="selectFeaturedProduct('burger-brutal')" role="button" tabindex="0" title="Ver Hamburguesa Fuego Brutal en el menú">
+        <img src="assets/images/burger.jpg" alt="Hamburguesa Fuego Brutal" class="hero-banner-img">
+        <div class="hero-floating-pill">
+          <span class="hero-pill-badge">Plato Estrella</span>
+          <span class="hero-pill-title">Burger Fuego Brutal</span>
+          <span class="hero-pill-price">$28.000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls: Search & Category Navigation -->
+  <section id="menu-controls" class="menu-controls-section">
+    <div class="menu-controls-container">
+      <div class="search-box-wrapper">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="search-products-input" 
+          class="search-input" 
+          placeholder="¿Qué se te antoja hoy? Busca por nombre o ingredientes..." 
+        />
+      </div>
+
+      <div class="categories-scroll-wrapper">
+        <button class="cat-pill active" data-category="all">🍽️ Todos</button>
+        <button class="cat-pill" data-category="burgers">🍔 Hamburguesas</button>
+        <button class="cat-pill" data-category="salchipapas">🍟 Salchipapas</button>
+        <button class="cat-pill" data-category="hotdogs">🌭 Perros Calientes</button>
+        <button class="cat-pill" data-category="mazorcadas">🌽 Mazorcadas & Desgranados</button>
+        <button class="cat-pill" data-category="bebidas">🥤 Bebidas & Postres</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main 2-Column Split Catalog (Left: Products | Right: Description) -->
+  <main id="menu-section" class="catalog-section">
+    <div class="section-header">
+      <div class="section-header-text">
+        <h3 class="section-title">Nuestro Menú</h3>
+        <p class="section-subtitle">Selecciona un producto de la izquierda para ver su descripción completa y personalizarlo</p>
+      </div>
+      <span id="catalog-count-label" class="catalog-count-badge">11 opciones</span>
+    </div>
+
+    <div class="menu-split-layout">
+      <!-- COLUMNA IZQUIERDA: Lista de Productos -->
+      <section class="menu-products-column" aria-label="Lista de productos">
+        <div id="products-list" class="products-list">
+          <!-- Los productos se inyectan dinámicamente con JavaScript -->
+        </div>
+      </section>
+
+      <!-- COLUMNA DERECHA: Descripción y Personalización (Sticky) -->
+      <aside class="menu-description-column" aria-label="Descripción detallada del producto">
+        <div id="product-inspector" class="product-inspector-card">
+          <!-- El detalle del producto seleccionado se inyecta dinámicamente con JavaScript -->
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div id="cart-backdrop" class="drawer-backdrop"></div>
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="cart-drawer-header">
+      <h3>Tu Pedido (<span class="cart-count-val">0</span>)</h3>
+      <button id="close-cart-btn" class="btn-close-drawer">&times;</button>
+    </div>
+
+    <div class="cart-items-container">
+      <div id="cart-empty-state" class="cart-empty-state">
+        <span class="cart-empty-icon">🛒</span>
+        <h4>Tu carrito está vacío</h4>
+        <p>Agrega unas deliciosas hamburguesas o salchipapas de nuestro menú.</p>
+      </div>
+      <div id="cart-items-list"></div>
+    </div>
+
+    <div id="cart-drawer-footer" class="cart-drawer-footer" style="display: none;">
+      <div class="cart-totals-summary">
+        <div class="total-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal-val">$0</span>
+        </div>
+        <div class="total-row">
+          <span>Domicilio estimado</span>
+          <span id="cart-delivery-val">$5.000</span>
+        </div>
+        <div class="total-row highlight">
+          <span>Total Estimado</span>
+          <span id="cart-total-val">$0</span>
+        </div>
+      </div>
+
+      <div class="cart-action-buttons">
+        <button id="clear-cart-btn" class="btn-clear-cart" title="Vaciar Carrito">Vaciar</button>
+        <button id="btn-proceed-checkout" class="btn-proceed-checkout">
+          <span>Pedir por WhatsApp</span> 💬
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Product Customization Modal -->
+  <div id="product-modal-backdrop" class="modal-backdrop"></div>
+  <div id="product-detail-modal" class="modal-window">
+    <div class="modal-header">
+      <h3 id="modal-detail-title">Detalle del Producto</h3>
+      <button id="close-product-modal" class="btn-modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <img id="modal-detail-img" src="" alt="Producto" class="modal-detail-img">
+      <div class="modal-detail-top-row">
+        <div class="modal-detail-price" id="modal-detail-price">$0</div>
+        <div class="inspector-meta-pills" id="modal-detail-meta"></div>
+      </div>
+      <p id="modal-detail-desc" class="modal-detail-desc"></p>
+      <div id="modal-detail-highlights" class="inspector-highlights"></div>
+
+      <div id="detail-extras-section" class="extras-section">
+        <h4 class="extras-title">Adiciones Opcionales:</h4>
+        <div id="detail-extras-list" class="extras-list"></div>
+      </div>
+
+      <div class="modal-notes-section">
+        <label for="detail-notes-input">Observaciones especiales:</label>
+        <input type="text" id="detail-notes-input" placeholder="Ej: Sin cebolla, salsas aparte, etc." />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="qty-control">
+        <button id="detail-qty-minus">-</button>
+        <span id="detail-qty-val" class="qty-display">1</span>
+        <button id="detail-qty-plus">+</button>
+      </div>
+      <button id="btn-add-from-modal" class="btn-add-modal-cart">
+        <span>Agregar al Carrito</span>
+        <span id="modal-add-btn-total">$0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- WhatsApp Checkout Modal -->
+  <div id="checkout-backdrop" class="modal-backdrop"></div>
+  <div id="checkout-modal" class="modal-window">
+    <div class="modal-header">
+      <h3>Datos de Entrega & WhatsApp 🛵</h3>
+      <button id="close-checkout-btn" class="btn-modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="checkout-form" class="checkout-form">
+        <div class="form-group">
+          <label>Tipo de Pedido:</label>
+          <div class="radio-pills-group">
+            <label class="radio-pill-card">
+              <input type="radio" name="delivery-type" value="delivery" checked />
+              <span>🛵 Domicilio</span>
+            </label>
+            <label class="radio-pill-card">
+              <input type="radio" name="delivery-type" value="pickup" />
+              <span>🏪 Recoger en local</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cust-name">Tu Nombre Completo *</label>
+          <input type="text" id="cust-name" required placeholder="Ej: Carlos Gómez" />
+        </div>
+
+        <div class="form-group">
+          <label for="cust-phone">Teléfono / WhatsApp de Contacto</label>
+          <input type="tel" id="cust-phone" placeholder="Ej: 312 629 2030" />
+        </div>
+
+        <div id="address-group" class="form-group">
+          <label for="cust-address">Dirección de Entrega *</label>
+          <input type="text" id="cust-address" placeholder="Ej: Carrera 15 # 45-20, Apto 302" />
+        </div>
+
+        <div class="form-group">
+          <label for="cust-neighborhood">Barrio o Punto de Referencia</label>
+          <input type="text" id="cust-neighborhood" placeholder="Ej: Barrio Los Rosales, frente al parque" />
+        </div>
+
+        <div class="form-group">
+          <label for="cust-payment">Método de Pago:</label>
+          <select id="cust-payment">
+            <option value="Nequi">Nequi (Transferencia)</option>
+            <option value="Daviplata">Daviplata</option>
+            <option value="Efectivo">Efectivo contra entrega</option>
+            <option value="Tarjeta / Datáfono">Tarjeta / Datáfono contra entrega</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cust-change">Si pagas en efectivo, ¿con cuánto pagas? (Para cambio):</label>
+          <input type="text" id="cust-change" placeholder="Ej: Pago con billete de $50.000" />
+        </div>
+
+        <div class="form-group">
+          <label for="cust-notes">Notas adicionales para el pedido:</label>
+          <input type="text" id="cust-notes" placeholder="Ej: Timbrar al citófono 302, salsas extra" />
+        </div>
+
+        <div class="checkout-totals-box">
+          <div class="total-row">
+            <span>Subtotal de productos:</span>
+            <span id="modal-subtotal-val">$0</span>
+          </div>
+          <div class="total-row" id="checkout-delivery-fee-row">
+            <span>Domicilio:</span>
+            <span id="modal-delivery-val">$5.000</span>
+          </div>
+          <div class="total-row highlight">
+            <span>Total a Pagar:</span>
+            <span id="modal-total-val">$0</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-send-whatsapp-order">
+          <span>📲 Enviar Pedido a WhatsApp</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- iOS PWA Install Modal -->
+  <div id="ios-install-modal" class="modal-window">
+    <div class="modal-header">
+      <h3>Instalar en tu iPhone 📲</h3>
+      <button id="close-ios-modal" class="btn-modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="ios-instruction-step">
+        <div class="step-num">1</div>
+        <div class="step-text">Toca el botón <strong>Compartir (icono con flecha ⬆️)</strong> en la barra inferior de Safari.</div>
+      </div>
+      <div class="ios-instruction-step">
+        <div class="step-num">2</div>
+        <div class="step-text">Desplázate hacia abajo y selecciona <strong>"Agregar a la pantalla de inicio" ➕</strong>.</div>
+      </div>
+      <div class="ios-instruction-step">
+        <div class="step-num">3</div>
+        <div class="step-text">Toca <strong>"Agregar"</strong> en la esquina superior derecha. ¡Y listo! Tendrás la app en tu menú.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Direct Action Buttons -->
+  <div class="floating-actions">
+    <!-- Floating Cart Button -->
+    <button id="floating-cart-btn" class="btn-floating-cart btn-open-cart hidden">
+      <span>🛒 Ver Pedido</span>
+      <span class="cart-badge cart-count-val">0</span>
+    </button>
+
+    <!-- Floating WhatsApp Direct Chat -->
+    <a href="#" id="direct-whatsapp-btn" class="btn-floating-wa" title="Escribir a WhatsApp">
+      💬
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>FUEGO URBANO</h4>
+        <p>Las mejores comidas rápidas de la ciudad, hechas con pasión, fuego y la mejor calidad artesanal.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Horarios de Atención</h4>
+        <p>Lunes a Jueves: 4:00 PM - 11:30 PM<br>Viernes a Domingo: 4:00 PM - 1:00 AM</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto & Domicilios</h4>
+        <p>WhatsApp Pedidos: <a href="https://wa.me/573126292030" target="_blank">+57 312 629 2030</a><br>Envío rápido en toda la ciudad.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Fuego Urbano Street Food & Grill. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/products.js?v=3"></script>
+  <script src="js/cart.js?v=3"></script>
+  <script src="js/checkout.js?v=3"></script>
+  <script src="js/pwa.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
+</body>
+</html>
